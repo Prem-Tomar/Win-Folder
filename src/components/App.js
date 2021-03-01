@@ -162,7 +162,6 @@ class App extends Component {
    * @param {String} item Path to the directory
    */
   redirectToPath = (item) => {
-    debugger;
     let finalTree = this.props.directory;
     let path = finalTree.currentPath.split("/")
     let index = path.indexOf(item);
@@ -174,7 +173,7 @@ class App extends Component {
   }
 
 
-  render = () => {
+  render() {
 
     return (
       <div>

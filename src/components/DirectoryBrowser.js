@@ -66,7 +66,7 @@ class DirectoryBrowser extends Component {
         }
     }
 
-    render = () => {
+    render() {
         let childs = this.props.directory.childs.filter(item => this.props.directory.currentPath === item.currentPath)
         if (this.props.directory.childs) {
             return (
