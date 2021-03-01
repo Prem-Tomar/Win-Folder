@@ -1,0 +1,27 @@
+.text-center{
+    text-align: center;
+}
+.folder{
+    display: inline-block;
+    position: relative;
+    border-radius: 5px;
+    border-color: rgb(32, 32, 32);
+    background-color: rgb(32, 32, 32);
+    border: 1px;
+    margin: 25px;
+    width: 100px;
+    height: 100px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    line-height: 80px;
+    padding: 10px;
+    color: white;
+    box-shadow: 3px -1px 22px -12px rgba(0,0,0,0.75);
+-webkit-box-shadow: 3px -1px 22px -12px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px -1px 22px -12px rgba(0,0,0,0.75);
+}
+.folder-del-icon{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
