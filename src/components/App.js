@@ -176,11 +176,11 @@ class App extends Component {
   render() {
 
     return (
-      <div>
+      <React.Fragment>
         {this.backToParent()}
         {this.directoryAdd()}
         <DirectoryBrowser />
-      </div>
+      </React.Fragment>
     )
   }
 }
