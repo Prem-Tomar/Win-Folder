@@ -153,7 +153,8 @@ class App extends Component {
     if (path.length > 1)
       path.pop()
     finalTree.currentPath = path.join("/")
-    this.props.changeDirectory({ ...this.props.directory, finalTree });
+    this.props.goBack({ ...this.props.directory, finalTree })
+    // this.props.changeDirectory();
   }
 
 
@@ -187,7 +188,7 @@ class App extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    directory: state.directory
+    directory: { ...state.directory }
 
   }
 }

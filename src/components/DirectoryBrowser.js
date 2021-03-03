@@ -15,7 +15,7 @@ class DirectoryBrowser extends Component {
     onFolderClick = (child) => {
         let finalTree = this.props.directory;
         finalTree.currentPath = `${child.currentPath}/${child.name}`
-        this.props.changeDirectory({ ...this.props.directory, finalTree });
+        this.props.changeDirectory({ ...finalTree });
     }
 
     /**
@@ -27,7 +27,7 @@ class DirectoryBrowser extends Component {
         event.stopPropagation();
         let finalTree = this.props.directory;
         finalTree.childs = finalTree.childs.filter(item => item !== child)
-        this.props.changeDirectory({ ...this.props.directory, finalTree });
+        this.props.delFolder({ ...finalTree });
     }
 
     /**
@@ -82,10 +82,9 @@ class DirectoryBrowser extends Component {
 }
 
 
-
 let mapStateToProps = (state) => {
     return {
-        directory: state.directory
+        directory: { ...state.directory }
     }
 }
 
