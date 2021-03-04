@@ -4,7 +4,7 @@ import { ADD_FOLDER, CHANGE_DIRECTORY, GO_BACK, SET_CURRENT_PATH } from "../acti
 let directoryProcessor = ({ dispatch, getState }) => next => action => {
     next(action)
     let { activePath, currentDirectory, rootNode, currentPath } = getState().directory;
-
+    let finalNode;
     /**
      * To add child to tree
      * @param {*} node 
@@ -27,7 +27,7 @@ let directoryProcessor = ({ dispatch, getState }) => next => action => {
             }
         }
     }
-    let finalNode;
+
     let findChild = (node, path) => {
         if (!node)
             return;
