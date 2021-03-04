@@ -56,11 +56,6 @@ let directoryProcessor = ({ dispatch, getState }) => next => action => {
     if (action.type === CHANGE_DIRECTORY) {
         let path = currentPath.split("/");
         activePath.push(path[path.length - 1])
-        console.log(activePath)
-        var tempNode = undefined;
-        for (let i = 1; i < activePath.length; i++) {
-            tempNode = findChild(tempNode || rootNode, activePath[i]);
-        }
 
         currentDirectory = finalNode;
         dispatch({ type: SET_CURRENT_PATH, payload: { ...getState().directory, activePath, currentDirectory, rootNode } })
