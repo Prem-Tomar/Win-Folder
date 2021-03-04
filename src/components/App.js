@@ -40,11 +40,12 @@ class App extends Component {
 
         this.setState({ ...this.state, error: "" })
 
+        // this.props.directory.rootNode.childs.push({ childs: [], name: formProps.folderName, currentPath: this.props.directory.currentPath, parent: this.props.directory.currentPath })
         this.props.directory.childs.push({ childs: [], name: formProps.folderName, currentPath: this.props.directory.currentPath })
 
         let finalTree = this.props.directory;
 
-        this.props.addFolder({ ...finalTree })
+        this.props.addFolder({ ...finalTree, newFolder: { childs: [], name: formProps.folderName, currentPath: this.props.directory.currentPath, parent: this.props.directory.currentPath } })
       }
       formProps.folderName = "";
     }
@@ -74,8 +75,7 @@ class App extends Component {
       <div className="col-lg-12 text-primary">
         <b>
           {
-            this.props.directory.currentPath
-              .split("/")
+            this.props.directory.activePath
               .map((item, i) => <Link to="#" onClick={() => this.redirectToPath(item)} key={i}> {item.toUpperCase()} /</Link>)
           }
         </b>
@@ -164,12 +164,14 @@ class App extends Component {
    */
   redirectToPath = (item) => {
     let finalTree = this.props.directory;
-    let path = finalTree.currentPath.split("/")
+    let path = finalTree.activePath
     let index = path.indexOf(item);
     index = index > 0 ? index : 0;
-    finalTree.currentPath = path.slice(0, index + 1).join("/")
+    path = path.slice(0, index + 1);
+    let activePath = path;
+    finalTree.currentPath = path.join("/")
     console.log(finalTree.currentPath)
-    this.props.changeDirectory({ ...this.props.directory, finalTree });
+    this.props.jumpToDirectory({ ...this.props.directory, finalTree, activePath });
 
   }
 

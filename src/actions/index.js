@@ -1,4 +1,4 @@
-import { ADD_FOLDER, CHANGE_DIRECTORY, DEL_FOLDER, GO_BACK } from "./events";
+import { ADD_FOLDER, CHANGE_DIRECTORY, DEL_FOLDER, GO_BACK, JUMP_TO_DIR } from "./events";
 
 /**
  * Trigger change directory action
@@ -44,6 +44,14 @@ export function goBack(payload) {
     return (dispatch) => {
         dispatch({
             type: GO_BACK, payload
+        })
+    }
+}
+
+export function jumpToDirectory(payload) {
+    return (dispatch) => {
+        dispatch({
+            type: JUMP_TO_DIR, payload
         })
     }
 }

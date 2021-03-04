@@ -8,6 +8,30 @@ import { XSquareFill } from 'react-bootstrap-icons';
 class DirectoryBrowser extends Component {
 
 
+    finalNode;
+    /**
+     * Find node in tree
+     * @param {*} node 
+     * @param {*} path 
+     */
+    findChild = (node, path) => {
+        if (!node)
+            return;
+        let length = node.childs.length;
+        if (node.name === path) {
+            this.finalNode = node;
+            return node;
+
+        }
+        else {
+            for (let i = 0; i < length; i++) {
+                this.findChild(node.childs[i], path)
+            }
+        }
+    }
+
+
+
     /**
      * To navigate to child directory
      * @param {*} child Folder forward navigation
@@ -15,6 +39,8 @@ class DirectoryBrowser extends Component {
     onFolderClick = (child) => {
         let finalTree = this.props.directory;
         finalTree.currentPath = `${child.currentPath}/${child.name}`
+        child.currentPath = `${child.currentPath}/${child.name}`
+        finalTree.currentDirectory = child;
         this.props.changeDirectory({ ...finalTree });
     }
 
@@ -26,7 +52,7 @@ class DirectoryBrowser extends Component {
     onFolderDelete = (child, event) => {
         event.stopPropagation();
         let finalTree = this.props.directory;
-        finalTree.childs = finalTree.childs.filter(item => item !== child)
+        this.finalNode.childs = this.finalNode.childs.filter(item => item !== child)
         this.props.delFolder({ ...finalTree });
     }
 
@@ -66,12 +92,17 @@ class DirectoryBrowser extends Component {
         }
     }
 
+
     render() {
-        let childs = this.props.directory.childs.filter(item => this.props.directory.currentPath === item.currentPath)
-        if (this.props.directory.childs) {
+
+        let { activePath, rootNode } = this.props.directory;
+        for (let i = 0; i < activePath.length; i++) {
+            this.findChild(rootNode, activePath[i]);
+        }
+        if (this.finalNode?.childs) {
             return (
                 <div className="row">
-                    {this.getFolders(childs)}
+                    {this.getFolders(this.finalNode.childs)}
                 </div>
             )
         }
